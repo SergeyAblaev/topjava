@@ -32,7 +32,6 @@ public class UserMealsUtil {
 
         //   List<UserMeal> filteredlist = mealList.stream().filter(el->el.getTime().isBefore(endTime)&&el.getTime().isAfter(startTime)).collect(Collectors.toList());
         List<UserMeal> filteredlist = mealList.stream().filter(el -> el.getTime().isBefore(endTime) && el.getTime().isAfter(startTime)).collect(Collectors.toList());
-        //   Map<Date,Integer> map = mealList.stream().collect(Collectors.groupingBy(UserMeal->)) ;  How?!
 
         Map<LocalDate, Integer> mymap = new TreeMap<>();
         for (UserMeal el : mealList
@@ -51,7 +50,7 @@ public class UserMealsUtil {
         for (UserMeal el : filteredlist
         ) {
             boolean exceed = false;
-            if (mymap.get(el.getDate()) > 2000) exceed = true;
+            if (mymap2.get(el.getDate()) > 2000) exceed = true;
             userMealWithExceedList.add(new UserMealWithExceed(el.getDateTime(), el.getDescription(), el.getCalories(), exceed));
         }
 
