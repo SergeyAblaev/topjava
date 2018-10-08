@@ -59,6 +59,12 @@
             <version>${logback.version}</version>
             <scope>runtime</scope>
         </dependency>
+        <!-- Logging with SLF4J & LogBack  + janino for the log path check!! -->
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>janino</artifactId>
+            <version>2.7.8</version>
+        </dependency>
 
         <!--Web-->
         <dependency>

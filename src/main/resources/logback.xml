@@ -5,7 +5,25 @@
     <jmxConfigurator/>
 
     <appender name="file" class="ch.qos.logback.core.FileAppender">
-        <file>/Users/sergey/projects/topjava15/topjava15/log/topjava.log</file>
+        <!--file>/Users/sergey/projects/topjava15/topjava15/log/topjava.log</file-->
+
+        <if condition='property("os.name").toLowerCase().startsWith("windows")'>
+            <then>
+                <!--file>${APPDATA}/MyApp/logs/MyApp.log</file-->
+                <file>C:/Projects/topjava15/topjava/logs/MyApp.log</file>
+            </then>
+            <else>
+                <if condition='property("os.name").toLowerCase().startsWith("mac")'>
+                    <then>
+                        <file>${user.home}/projects/topjava15/topjava15/log/topjava.log</file>
+                    </then>
+                    <else>
+                        <file>${user.home}/topjava.log</file>
+                    </else>
+                </if>
+            </else>
+        </if>
+
 
         <encoder>
             <charset>UTF-8</charset>
