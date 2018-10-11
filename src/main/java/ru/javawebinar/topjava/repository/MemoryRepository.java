@@ -17,8 +17,8 @@ public class MemoryRepository implements Repository {
 
     @Override
     public synchronized int create(LocalDateTime datetime, String descript, int calories) {  // synchronized - this correct?
-        repository.add(new Meal(datetime,descript,calories));
-        return repository.size()-1;
+        repository.add(new Meal(datetime,descript,calories,repository.size()));
+        return repository.size();  //-1
     }
 
     @Override
