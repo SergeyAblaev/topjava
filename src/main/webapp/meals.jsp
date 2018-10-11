@@ -3,10 +3,20 @@
 <html>
 <head>
     <title>Users</title>
+    <style>
+        .blueText {
+            color: blue;
+        }
+        .redText {
+            color: red;
+        }
+    </style>
+
 </head>
 <body>
 <h3><a href="index.html">Home</a></h3>
 <h2>Users</h2>
+
 
 <table border="1" cellpadding="8" cellspacing="0">
     <thead>
@@ -19,15 +29,16 @@
     </tr>
     </thead>
     <c:forEach var="meal" items="${requestScope.meals}">
-    <%--c:forEach items="${meals}" var="meal"--%>
+        <%--c:forEach items="${meals}" var="meal"--%>
         <jsp:useBean id="meal" scope="page" type="ru.javawebinar.topjava.model.MealWithExceed"/>
         <%--c:choose--%>
-        <tr >
+        <tr>
             <td>
-
+                _=_
 
             </td>
-            <td>${meal}</td>
+            <span class="blueText"> tetet
+            <td>  <span class="blueText"> : ggg  ${meal}</td>
             <td>${meal.calories}</td>
             <td><a href="meals?action=update&id=${meal.id}">Update</a></td>
             <td><a href="meals?action=delete&id=${meal.id}">Delete</a></td>
