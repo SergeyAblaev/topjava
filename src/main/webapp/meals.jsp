@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Users</title>
@@ -19,6 +20,7 @@
     </thead>
     <c:forEach items="${meals}" var="meal">
         <%--jsp:useBean id="meal" scope="page" type="ru.javawebinar.topjava.to.MealWithExceed"/--%>
+        <%--c:choose--%>
         <tr data-mealExceed="${meal.exceed}">
             <td>
                     ${meal.dateTime.toLocalDate()} ${meal.dateTime.toLocalTime()}
@@ -31,6 +33,7 @@
             <td><a href="meals?action=update&id=${meal.id}">Update</a></td>
             <td><a href="meals?action=delete&id=${meal.id}">Delete</a></td>
         </tr>
+        <%--/c:choose--%>;
     </c:forEach>
 </table>
 </body>
