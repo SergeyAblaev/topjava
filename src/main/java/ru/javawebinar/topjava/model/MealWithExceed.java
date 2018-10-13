@@ -15,6 +15,10 @@ public class MealWithExceed {
 
     private final int id;
 
+    public boolean isExceed() {
+        return exceed;
+    }
+
     private final boolean exceed;
 
     public MealWithExceed(LocalDateTime dateTime, String description, int calories, boolean exceed, int id) {

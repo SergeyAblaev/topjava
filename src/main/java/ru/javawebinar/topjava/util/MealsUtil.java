@@ -2,6 +2,8 @@ package ru.javawebinar.topjava.util;
 
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.MealWithExceed;
+import ru.javawebinar.topjava.repository.MealRepository;
+import ru.javawebinar.topjava.repository.MemoryMealRepository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,20 +18,20 @@ import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toList;
 
 public class MealsUtil {
-    static List<Meal> meals;
 
-    static {
-         meals = Arrays.asList(
-                new Meal(LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500, 0),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 30, 13, 0), "Обед", 1000, 1),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 30, 20, 0), "Ужин", 500, 2),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 31, 10, 0), "Завтрак", 1000, 3),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обед", 500, 4),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510, 5)
-         );
+    public static void initMealsRepository(MealRepository mealRepository) {
+        mealRepository.create(LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500);
+        mealRepository.create(LocalDateTime.of(2015, Month.MAY, 30, 13, 0), "Обед", 1000);
+        mealRepository.create(LocalDateTime.of(2015, Month.MAY, 30, 20, 0), "Ужин", 50);
+        mealRepository.create(LocalDateTime.of(2015, Month.MAY, 31, 10, 0), "Завтрак", 1000);
+        mealRepository.create(LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обед", 500);
+        mealRepository.create(LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510);
     }
 
     public static void main(String[] args) {
+        MealRepository repository = new MemoryMealRepository();
+        initMealsRepository(repository);
+        List<Meal> meals = repository.getAllMeals();
 
         List<MealWithExceed> mealsWithExceeded = getFilteredWithExceeded(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
         mealsWithExceeded.forEach(System.out::println);
@@ -40,6 +42,10 @@ public class MealsUtil {
     }
 
     public static List<MealWithExceed> getUserMeal(){
+        MealRepository repository = new MemoryMealRepository();
+  //      initMealsRepository(repository);
+        List<Meal> meals = repository.getAllMeals();
+
         return getFilteredWithExceeded(meals,LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
     }
 

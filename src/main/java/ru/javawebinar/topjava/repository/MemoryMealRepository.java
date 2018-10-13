@@ -2,18 +2,13 @@ package ru.javawebinar.topjava.repository;
 
 import ru.javawebinar.topjava.model.Meal;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class MemoryRepository implements Repository {
+public class MemoryMealRepository implements MealRepository {
 
-    static List MEALS = new ArrayList<>();
-
-    List<Meal> repository = MemoryRepository.MEALS;
+    static List<Meal> repository = new ArrayList<>();
 
     @Override
     public synchronized int create(LocalDateTime datetime, String descript, int calories) {  // synchronized - this correct?
@@ -33,9 +28,15 @@ public class MemoryRepository implements Repository {
 
     @Override
     public void delete(int id) {
-        synchronized (MEALS){      // or this correct?
+        synchronized (repository){      // or this correct?
         repository.remove(id);
         }
 
+
+    }
+
+    @Override
+    public List<Meal> getAllMeals() {
+        return repository;
     }
 }

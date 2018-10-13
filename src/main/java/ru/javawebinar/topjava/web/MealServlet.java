@@ -1,6 +1,8 @@
 package ru.javawebinar.topjava.web;
 
 import org.slf4j.Logger;
+import ru.javawebinar.topjava.repository.MemoryMealRepository;
+import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.util.MealsUtil;
 
 import javax.servlet.ServletException;
@@ -14,6 +16,11 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 public class MealServlet extends HttpServlet {
     private static final Logger log = getLogger(MealServlet.class);
+    static MealRepository repository = new MemoryMealRepository();
+
+    {
+MealsUtil.initMealsRepository(repository);
+}
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,9 +36,21 @@ public class MealServlet extends HttpServlet {
                     response.sendRedirect("delete.jsp");
             }
         } else {
-            request.setAttribute("meals",MealsUtil.getUserMeal());
+
+            request.setAttribute("meals", MealsUtil.getUserMeal());
             request.getRequestDispatcher("/meals.jsp").forward(request, response);
             //      response.sendRedirect("meals.jsp");
         }
+    }
+    @Override
+    protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        log.debug("my doPOST method!");
+        request.getParameterMap();
+        request.getParameter( "id" );
+
+
+        repository.delete(3);
+
+        request.getRequestDispatcher("/meals.jsp").forward(request,response);
     }
 }

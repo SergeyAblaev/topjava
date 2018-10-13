@@ -32,19 +32,34 @@
         <%--c:forEach items="${meals}" var="meal"--%>
         <jsp:useBean id="meal" scope="page" type="ru.javawebinar.topjava.model.MealWithExceed"/>
         <%--c:choose--%>
-        <tr>
-            <td>
+        <tr class=${"blueText"}>
+            <%--td  class="${meal.exceed ? blueText : redText}"--%>
+            <td  >
                 _=_
 
             </td>
-            <span class="blueText"> tetet
-            <td>  <span class="blueText"> : ggg  ${meal}</td>
+            <td>  ${meal}</td>
             <td>${meal.calories}</td>
             <td><a href="meals?action=update&id=${meal.id}">Update</a></td>
             <td><a href="meals?action=delete&id=${meal.id}">Delete</a></td>
+            <td>
+                <form action="meals" method="POST" target="_blank">
+                    <input name="nameDB" id="top-panel">
+                <input type="submit" value="Delete  " />  <%-- <input type="id" value=${meal.id} />  --%>
+
+                </form>
+            </td>
         </tr>
         <%--/c:choose--%>;
     </c:forEach>
 </table>
+
+<form action="../web/main.jsp" method="POST" target="_blank">
+    <input type ="checkbox" name="maths" checked="checked" /> Maths
+    <input type ="checkbox" name = "physics" /> Physics
+    <input type="checkbox" name="chemistry" checked="checked"/>
+
+    <input type="submit" value="Select Subject" />
+</form>
 </body>
 </html>
