@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MemoryMealRepository implements MealRepository {
+public class MemoryMealRepository   implements MealRepository {
 
     static List<Meal> repository = new ArrayList<>();
 
@@ -17,7 +17,7 @@ public class MemoryMealRepository implements MealRepository {
     }
 
     @Override
-    public Meal read(int id) {
+    public Meal read(int id) throws ArrayIndexOutOfBoundsException  {
         return repository.get(id);
     }
 
@@ -27,8 +27,8 @@ public class MemoryMealRepository implements MealRepository {
     }
 
     @Override
-    public void delete(int id) {
-        synchronized (repository){      // or this correct?
+    public void delete(int id)  throws ArrayIndexOutOfBoundsException {
+        synchronized (repository) {      // or this correct?
         repository.remove(id);
         }
 

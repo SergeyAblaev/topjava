@@ -44,12 +44,12 @@ MealsUtil.initMealsRepository(repository);
     }
     @Override
     protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        log.debug("my doPOST method!");
         request.getParameterMap();
-        request.getParameter( "id" );
-
-
-        repository.delete(3);
+        int id = Integer.valueOf(request.getParameter( "id" ));
+        log.debug("delete meal whitch id = "+id);
+        try {
+            repository.delete(id);
+        } catch (ArrayIndexOutOfBoundsException e ){}
 
         request.getRequestDispatcher("/meals.jsp").forward(request,response);
     }

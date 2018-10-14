@@ -44,7 +44,7 @@
             <td><a href="meals?action=delete&id=${meal.id}">Delete</a></td>
             <td>
                 <form action="meals" method="POST" target="_blank">
-                    <input name="nameDB" id="top-panel">
+                    <input type="hidden" name="id" value=${meal.id}>
                 <input type="submit" value="Delete  " />  <%-- <input type="id" value=${meal.id} />  --%>
 
                 </form>
