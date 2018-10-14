@@ -32,7 +32,7 @@
         <%--c:forEach items="${meals}" var="meal"--%>
         <jsp:useBean id="meal" scope="page" type="ru.javawebinar.topjava.model.MealWithExceed"/>
         <%--c:choose--%>
-        <tr class=${"blueText"}>
+        <tr class="${meal.exceed ? 'blueText' : 'redText'}">
             <%--td  class="${meal.exceed ? blueText : redText}"--%>
             <td  >
                 _=_
