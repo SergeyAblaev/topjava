@@ -18,6 +18,7 @@ import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toList;
 
 public class MealsUtil {
+    public static int DEFAULT_CALORIES_PER_DAY=2000;
 
     public static void initMealsRepository(MealRepository mealRepository) {
         mealRepository.create(LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500);
@@ -46,7 +47,7 @@ public class MealsUtil {
   //      initMealsRepository(repository);
         List<Meal> meals = repository.getAllMeals();
 
-        return getFilteredWithExceeded(meals,LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
+        return getFilteredWithExceeded(meals,LocalTime.of(7, 0), LocalTime.of(23, 0), 2000);
     }
 
 

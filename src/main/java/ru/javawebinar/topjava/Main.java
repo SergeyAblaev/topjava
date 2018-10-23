@@ -7,5 +7,11 @@ package ru.javawebinar.topjava;
 public class Main {
     public static void main(String[] args) {
         System.out.format("Hello Topjava Enterprise!");
-    }
+        int i;
+    for (i=1; i>0; i++)
+    {};
+        System.out.println(i);
+        System.out.println('a' < 70);
+}
+
 }

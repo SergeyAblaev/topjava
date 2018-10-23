@@ -37,8 +37,7 @@ MealsUtil.initMealsRepository(repository);
             }
         } else {
 
-            request.setAttribute("meals", MealsUtil.getUserMeal());
-            request.getRequestDispatcher("/meals.jsp").forward(request, response);
+            setMealsAndForward(request, response);
             //      response.sendRedirect("meals.jsp");
         }
     }
@@ -50,7 +49,11 @@ MealsUtil.initMealsRepository(repository);
         try {
             repository.delete(id);
         } catch (ArrayIndexOutOfBoundsException e ){}
+        setMealsAndForward(request, response);
+    }
 
-        request.getRequestDispatcher("/meals.jsp").forward(request,response);
+    private void setMealsAndForward(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("meals", MealsUtil.getUserMeal());
+        request.getRequestDispatcher("/meals.jsp").forward(request, response);
     }
 }
