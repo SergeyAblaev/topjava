@@ -15,6 +15,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static ru.javawebinar.topjava.TestUtil.readFromJsonResultActions;
 import static ru.javawebinar.topjava.UserTestData.*;
 
 class AdminRestControllerTest extends AbstractControllerTest {
@@ -36,7 +37,7 @@ class AdminRestControllerTest extends AbstractControllerTest {
         mockMvc.perform(get(REST_URL + "by?email=" + USER.getEmail()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(contentJson(USER));
+                .andExpect(getUserMatcher(USER));
     }
 
     @Test
@@ -68,7 +69,7 @@ class AdminRestControllerTest extends AbstractControllerTest {
                 .content(JsonUtil.writeValue(expected)))
                 .andExpect(status().isCreated());
 
-        User returned = TestUtil.readFromJson(action, User.class);
+        User returned = readFromJsonResultActions(action, User.class);
         expected.setId(returned.getId());
 
         assertMatch(returned, expected);
@@ -80,6 +81,6 @@ class AdminRestControllerTest extends AbstractControllerTest {
         TestUtil.print(mockMvc.perform(get(REST_URL))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(contentJson(ADMIN, USER)));
+                .andExpect(getUserMatcher(ADMIN, USER)));
     }
 }
